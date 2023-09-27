@@ -13,7 +13,7 @@ const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassw
     const handleSubmitLogin = (e) =>{
         e.preventDefault();
 
-        fetch("http://localhost:5003/login", {
+        fetch("http://localhost:5003/user/login", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(usernamePassword)

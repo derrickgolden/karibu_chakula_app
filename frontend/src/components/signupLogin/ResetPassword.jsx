@@ -7,7 +7,7 @@ const ResetPassword = ({ onHandleChangeSignupLoginForm}) =>{
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        fetch("http://localhost:5003/resetpassword", {
+        fetch("http://localhost:5003/user/resetpassword", {
             method: 'PATCH',
             headers:{"Content-Type": "application/json"},
             body: JSON.stringify({email})

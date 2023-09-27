@@ -15,7 +15,7 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
             console.log("password does not match")
             return
         }else{
-            fetch("http://localhost:5003/signup", {
+            fetch("http://localhost:5003/user/signup", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(signupDetails)

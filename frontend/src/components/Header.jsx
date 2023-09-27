@@ -7,8 +7,10 @@ import { mealsDate } from "../actions/dateAction";
 import { recipeList } from "../actions/recipeListAction";
 import { selectMeals } from "../actions/selectMealsAction";
 
-import { GoArrowSmallLeft } from "react-icons/go"
-import { GoArrowSmallRight } from "react-icons/go"
+import { ImArrowRight } from "react-icons/im"
+import { GoArrowDownLeft } from "react-icons/go";
+import { GoArrowDownRight } from "react-icons/go";
+import { ImArrowLeft } from "react-icons/im"
 import { AiOutlineMenuUnfold, AiOutlineMenuFold,
     AiOutlineSave, AiOutlineDownload } from "react-icons/ai"
 
@@ -51,10 +53,10 @@ const Header = (props) =>{
                     <h1 className="text-2xl font-mono es:text-4xl">{getDateDetails().monthYear}.</h1>
                 </div>
                 <div className="flex  items-center mt-4 border-lightOrange">
-                    <button className="py-0 md:px-4  hover:text-lightOrange"
+                    <button className="py-0 px-4  hover:text-lightOrange"
                         onClick={() => handlePrevDateClick()}
                     >
-                        < GoArrowSmallLeft className="w-12 h-12 es:w-16 es:h-16" />
+                        < ImArrowLeft className="w-7 h-7 md:w-10 md:h-10" />
                     </button>
                     <button className="flex items-center text-sm sm:text-2xl sm:h-10 border border-lightOrange 
                         px-4 rounded-md hover:text-lightOrange pt-2 pb-2"
@@ -62,10 +64,10 @@ const Header = (props) =>{
                     >
                         Jump To Today
                     </button>
-                    <button className="py-0 md:px-4  hover:text-lightOrange"
+                    <button className="py-0 px-4  hover:text-lightOrange"
                         onClick={() => handleNextDateClick()}
                     >
-                        <GoArrowSmallRight className="w-12 h-12 es:w-16 es:h-16" />
+                        <ImArrowRight className="w-7 h-7 md:w-10 md:h-10" />
                     </button>
                 </div>
             </div>

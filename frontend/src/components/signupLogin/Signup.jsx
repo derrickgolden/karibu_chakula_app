@@ -1,5 +1,6 @@
 
 import { useState } from "react"
+import { Link } from "react-router-dom";
 
 const Signup = ({onHandleChangeSignupLoginForm}) =>{
     const [signupDetails, setSignDetails] = useState({email: "", username: "", password: "", repeatPassword: ""})
@@ -65,9 +66,9 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
                     </button>
                 </form>
                 
-                <p onClick={() => onHandleChangeSignupLoginForm()}>
-                    Already have an account? <a href="#" 
-                className="underline hover:tracking-wider">Log in</a> </p>
+                <p> Already have an account? <Link to="/user/login" 
+                    className="underline hover:tracking-wider">Log in</Link> 
+                </p>
             </div>
         </div>
     )

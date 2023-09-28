@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ResetPassword = ({ onHandleChangeSignupLoginForm}) =>{
 
@@ -42,9 +43,9 @@ const ResetPassword = ({ onHandleChangeSignupLoginForm}) =>{
                     </button>
                 </form>
 
-                <p onClick={() => onHandleChangeSignupLoginForm()}>
-                     <a href="#" 
-                className="underline hover:tracking-wider">Log in instead</a> </p>
+                <p> <Link to="/user/login" 
+                    className="underline hover:tracking-wider">Log in instead</Link> 
+                </p>
             </div>
         </div>
     )

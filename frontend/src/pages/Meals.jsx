@@ -2,23 +2,15 @@ import { useRef, useState, useEffect } from "react";
 
 import { connect } from 'react-redux';
 
-import { recipeList } from "../actions/recipeListAction";
-import { selectMeals } from "../actions/selectMealsAction";
+import { recipeList, selectMeals, } from "../actions/index";
 
-import CaloriesCard from "../components/CaloriesCard";
-import MealCard from "../components/MealCard";
-import { DayDate } from "../components/DayDate";
+import { CaloriesCard, MealCard, DayDate } from "../components/index"
 import DisplayLoadPage from "./DisplayLoadPage";
 
-import { mealsSelect, nutritionCalc } from "../assets/calculations/mealsCalc";
-import { getDateDetails } from "../assets/calculations/dateCalc";
-import { updateLocalStorage } from "../assets/localStorage";
-import { getLocalStorage } from "../assets/localStorage";
-import { mealTimeDetails } from "../assets/constants";
+import { mealsSelect, nutritionCalc, updateLocalStorage, getDateDetails,
+    getLocalStorage, mealTimeDetails } from "../assets/index"
 
 import { PropTypes } from 'prop-types'
-
-
 
 const DisplayMeals = ({newDate, selectedMealsAvailable, onHandleReloadDayMeal,
                         selectedMeals, date, selectMeals, nutritionData, 

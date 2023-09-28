@@ -1,8 +1,10 @@
 
 import { useState } from "react";
+import { Link, Navigate, redirect } from "react-router-dom";
 
 const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassword }) =>{
     const [usernamePassword, setUsernamePassword] = useState({usernameEmail: "", password: ""})
+    const [userLogin, setUserLogin] = useState({ user: null, error: null });
 
     const handleUsernamePasswordInput = (e) =>{
         const {name, value} = e.target;
@@ -21,15 +23,21 @@ const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassw
         .then(response => response.json())
         .then(result =>{
             if(result.success){
-                handleLogin(true);
+                console.log(result)
+                setUserLogin({user: true})
             }else{
                 console.log(result)
+                setUserLogin({error: result})
             }
         } )
         .catch(error => console.log('error', error));
     }
     return(
         <div className="flex flex-col justify-center items-center px-2">
+            {userLogin.error && <p>{userLogin?.error?.msg}</p>}
+            {userLogin.user && (
+                <Navigate to="/" replace={true} />
+            )}
             <div className="flex flex-col justify-center items-center bg-lightOrange
                 w-full md:w-1/2 py-8 px-2 text-center rounded-md gap-4 mt-8 ">
                 <h2 className="text-4xl text-darkBlack">
@@ -55,15 +63,15 @@ const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassw
                     </button>
                 </form>
 
-                <p onClick={() => onHandleResetPassword({r_password: true})}>Forgot your password? 
-                    <a href="#" className="underline hover:tracking-wider">
+                <p >Forgot your password? 
+                    <Link to="/user/resetpassword" className="underline hover:tracking-wider">
                         Reset
-                    </a>
+                    </Link>
                 </p>
                 
-                <p onClick={() => onHandleChangeSignupLoginForm()}>
-                    You don't have an account? <a href="#" 
-                className="underline hover:tracking-wider">Sign Up</a> </p>
+                <p >
+                    You don't have an account? <Link to={`/user/signup`} 
+                className="underline hover:tracking-wider">Sign Up</Link> </p>
             </div>
         </div>
     )

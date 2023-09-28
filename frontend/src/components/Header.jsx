@@ -16,6 +16,7 @@ import { AiOutlineMenuUnfold, AiOutlineMenuFold,
 
 import { getDateDetails } from "../assets/calculations/dateCalc";
 import { logo } from "../assets/images";
+import { Outlet } from "react-router-dom";
 
 const Header = (props) =>{
     const [menu, setMenu] = useState(false)
@@ -40,6 +41,7 @@ const Header = (props) =>{
     }
 
     return(
+        <>
         <div className=" flex justify-between bg-darkGray text-textWhite p-4">
             <div className="">
             {/* <a href='https://dryicons.com/free-icons/food-logo'> Icon by Dryicons </a> */}
@@ -92,6 +94,8 @@ const Header = (props) =>{
                 </div>
             </div>
         </div>
+        <Outlet />
+        </>
     )
 }
 

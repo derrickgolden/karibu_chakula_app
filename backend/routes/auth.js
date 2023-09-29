@@ -30,15 +30,14 @@ router.post('/login', async (req, res) =>{
 
     try {
         if(!passwordHash){
-            res.status(302).send({success: false, msg: "User not found"})
+            res.status(302).send({success: false, msg: "Username or Email Unavailable"})
         }else{
             const match = await bcrypt.compare(password, passwordHash);
             if(match) {
                 //login
                 res.status(200).send({success: true, msg: "User Found"})
             }else{
-                res.status(302).send({success: false, msg: "User not found"})
-                console.log("password did not match")
+                res.status(302).send({success: false, msg: "Incorrect Password"})
             }
         }
     } catch (error) {

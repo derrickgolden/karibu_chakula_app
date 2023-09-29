@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Signup = ({onHandleChangeSignupLoginForm}) =>{
     const [signupDetails, setSignDetails] = useState({email: "", username: "", password: "", repeatPassword: ""})
+    const [error, setError] = useState({passwordMatch: false, usernameAvl: false, emailAvl: false})
 
     const onHandleSignupDetailsInput = (e) =>{
         const {name, value} = e.target;
@@ -50,6 +51,7 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
                     <input type="text" name="username" placeholder="Username" required
                         value={signupDetails.username} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
+                        <lebal className="pt-0">Username</lebal>
                     <input type="password" name="password" id="password" placeholder="Password" required
                         value={signupDetails.password} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
@@ -58,6 +60,7 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
                         value={signupDetails.repeatPassword} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
                     
+                    {}
                     <button type="submit" 
                     className="flex justify-center items-center gap-2 border border-darkBlack
                         px-4 py-2 rounded-sm hover:text-textWhite hover:bg-darkGray w-full"

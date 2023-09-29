@@ -34,7 +34,6 @@ const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassw
     }
     return(
         <div className="flex flex-col justify-center items-center px-2">
-            {userLogin.error && <p>{userLogin?.error?.msg}</p>}
             {userLogin.user && (
                 <Navigate to="/" replace={true} />
             )}
@@ -55,23 +54,24 @@ const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassw
                     required value={usernamePassword.password}
                     className="px-4 py-2 rounded w-full outline-0"/>
 
+                    {userLogin.error && <p className="text-[#DC3545]">{userLogin?.error?.msg}</p>}
                     <button type="submit" 
-                    className="flex justify-center items-center gap-2 border border-darkBlack
+                    className="flex justify-center items-center border border-darkBlack
                         px-4 py-2 rounded-sm hover:text-textWhite hover:bg-darkGray w-full"
-                        onClick={() =>{}}>
+                    >
                         Log In
                     </button>
                 </form>
 
-                <p >Forgot your password? 
+                <p>Forgot your password? 
                     <Link to="/user/resetpassword" className="underline hover:tracking-wider">
                         Reset
                     </Link>
                 </p>
-                
                 <p >
                     You don't have an account? <Link to={`/user/signup`} 
-                className="underline hover:tracking-wider">Sign Up</Link> </p>
+                    className="underline hover:tracking-wider">Sign Up</Link> 
+                </p>
             </div>
         </div>
     )

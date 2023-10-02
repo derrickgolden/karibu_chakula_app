@@ -15,10 +15,10 @@ const Login  = ({onHandleChangeSignupLoginForm , handleLogin, onHandleResetPassw
     const handleSubmitLogin = (e) =>{
         e.preventDefault();
 
-        fetch("http://localhost:5003/user/login", {
+        fetch("http://localhost:3000/register", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(usernamePassword)
+            body: JSON.stringify({name:"derrick",phone:"3333333333", door_no:"A4"})
         })
         .then(response => response.json())
         .then(result =>{

@@ -26,15 +26,30 @@ const insertSelectedMeals = async(date, meals) => {
 const signupUser = async(email, username, password) => {
     const signup_date = new Date();
     try {
-        const [res] = await pool.query(`
-        INSERT INTO signup_details (email, username, password, signup_date)
-        VALUES (?, ?, ?, ?)
-        `, [email, username, password, signup_date]);
-
-        console.log(res)
-        return res.insertId;
+        const [response] = await pool.query(`
+        SELECT * FROM signup_details
+        WHERE username = ? OR email = ?
+        `, [username, email]);
+        console.log(response);
+        if(response.length === 0){
+            const [res] = await pool.query(`
+            INSERT INTO signup_details (email, username, password, signup_date)
+            VALUES (?, ?, ?, ?)
+            `, [email, username, password, signup_date]);
+    
+            console.log(res)
+            return {insertId: res.insertId, msg: "User Registered"};
+        }else{
+            if(response[0].email === email){
+                return {insertId: null, rejectInput: "emailAvl", msg: "Email already Registered, login"};
+            }else if(response[0].username === username){
+                return {insertId: null, rejectInput: "usernameAvl", msg: "Username unavailable, try another one"};
+            } 
+            return {insertId: null, rejectInput: null, msg: "Something went wrong, try again"};
+        }
     } catch (error) {
         console.log(error)
+        return {insertId: null, rejectInput: null, msg: "Something went wrong, try again"};
     }
 }
 const loginUser = async(username, ) => {

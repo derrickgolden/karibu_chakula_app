@@ -1,10 +1,11 @@
 
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = ({onHandleChangeSignupLoginForm}) =>{
+    const navigate = useNavigate();
     const [signupDetails, setSignDetails] = useState({email: "", username: "", password: "", repeatPassword: ""})
-    const [error, setError] = useState({passwordMatch: false, usernameAvl: false, emailAvl: false})
+    const [error, setError] = useState({passwordMatch: null, usernameAvl: null, emailAvl: null})
 
     const onHandleSignupDetailsInput = (e) =>{
         const {name, value} = e.target;
@@ -14,8 +15,7 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
     const onHandleSignup = (e) =>{
         e.preventDefault();
         if(signupDetails.password !== signupDetails.repeatPassword){
-            console.log("password does not match")
-            return
+            setError({ passwordMatch: "Password does not match" })
         }else{
             fetch("http://localhost:5003/user/signup", {
             method: 'POST',
@@ -25,12 +25,16 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
             .then(response => response.json())
             .then(result =>{
                 if(result.success){
-                    onHandleChangeSignupLoginForm();
+                    navigate("/user/login");
                 }else{
                     console.log(result)
+                    setError({ [result.res.rejectInput]: result.res.msg})
                 }
             } )
-            .catch(error => console.log('error', error));
+            .catch(error => {
+                console.log('error', error)
+                setError({ passwordMatch: "Something went wrong, try again later!" })
+            });
         }
     }
     return(
@@ -43,15 +47,18 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
                 <p>We need few information to get started.</p>
 
                 <form action="" onSubmit={(e) => onHandleSignup(e)}
-                className="flex flex-col justify-center items-center
-                w-3/4 py-2 gap-4">
+                className="flex flex-col justify-center items-center w-full
+                es:w-3/4 py-2 gap-4">
                     <input type="email" name="email" id="email" placeholder="Email" required
                         value={signupDetails.email} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
+                    {error.emailAvl && <p className="text-[#DC3545]">{error.emailAvl}</p>}
+
                     <input type="text" name="username" placeholder="Username" required
                         value={signupDetails.username} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
-                        <lebal className="pt-0">Username</lebal>
+                    {error.usernameAvl && <p className="text-[#DC3545]">{error.usernameAvl}</p>}
+
                     <input type="password" name="password" id="password" placeholder="Password" required
                         value={signupDetails.password} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
@@ -60,7 +67,7 @@ const Signup = ({onHandleChangeSignupLoginForm}) =>{
                         value={signupDetails.repeatPassword} onChange={onHandleSignupDetailsInput}
                         className="px-4 py-2 rounded w-full outline-0"/>
                     
-                    {}
+                    {error.passwordMatch && <p className="text-[#DC3545]">{error.passwordMatch}</p>}
                     <button type="submit" 
                     className="flex justify-center items-center gap-2 border border-darkBlack
                         px-4 py-2 rounded-sm hover:text-textWhite hover:bg-darkGray w-full"
